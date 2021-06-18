@@ -18,7 +18,7 @@ Here in this project I used two main tools; AzureML and LSTM to predict daily MS
     # import the dataset from Yahoo finance
      MSFT = data.DataReader('MSFT', 'yahoo',start='1/1/2019')
      
-![Diagram1]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/MSstock.PNG "MS stock") 
+![Diagram0]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/MSstock.PNG "MS stock") 
 
 
 ## Automated ML
@@ -51,17 +51,39 @@ There were 36 models running, were the best model turned out to be voting ensemb
 
 
 ## Hyperparameter Tuning
-34 different models were trained and compared The best model used the VotingEnsemble algorithm, reaching an accuracy of 87.30 %. Ten-fold cross validation was used. All the columns were used for training.
-
-According to (1), serum creatinine and ejection fraction are the most relevant features and are enough to predict if a patient with heart failure will survive or not. Thus, using a dataset with only these two columns would provide better results, increased accuracy and higher performance.
+For the hyperparameter tuning I used LSTM with the following parameters:
+      
+     #param_sampling = RandomParameterSampling(
+    {
+        '--n_epochs': choice(10,20,50),
+        '--model_type': choice('LSTM'),
+        '--n_layers': choice(0,1,2),
+        '--activation': choice(16,64,128),
+        '--window': choice(6,12,15),
+        '--dropout': choice(0.0,0.2,0.3),
+        '--batch_size': choice(16,64,128)
+    }
 
 ### Results
-*TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
+The best parameters were chosen as follows:
+      # MAE: 2.777194115423387
+        ['--dataset', 'MSFT-stock cleaned', '--activation', '64', '--batch_size', '16', '--dropout', '0', '--model_type', 'LSTM', '--n_epochs', '500', '--n_layers', '2', '--window', '12']
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+
+![Diagram5]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/Hrundetails.PNG "Rundetails 1") 
+![Diagram6](https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/Hrundetails2.PNG "Rundetails 2") 
+![Diagram7]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/hbest.PNG "best model") 
+![Diagram8](https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/hruncompleted.PNG "best model") 
+
 
 ## Model Deployment
-*TODO*: Give an overview of the deployed model and instructions on how to query the endpoint with a sample input.
+with respect with the comparison of the two methods, automl got 0.94270894 MAE anf the LSTM got MAE: 2.777194115423387, hence I deployed the automl model.
+![Diagram9]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/deploy1.PNG "deploy") 
+![Diagram10](https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/deployementcompleted.PNG "deployement completed") 
+
+
+ test our endpoint with the data 
+ ![Diagram11]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/testendpoint.PNG "test endpoint") 
 
 ## Screen Recording
 *TODO* Provide a link to a screen recording of the project in action. Remember that the screencast should demonstrate:
