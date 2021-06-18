@@ -81,7 +81,7 @@ with respect with the comparison of the two methods, automl got 0.94270894 MAE a
 ![Diagram9]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/deploy1.PNG "deploy") 
 ![Diagram10](https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/deployementcompleted.PNG "deployement completed") 
 
-
+ 
  test our endpoint with the data 
  ![Diagram11]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/testendpoint.PNG "test endpoint") 
 
