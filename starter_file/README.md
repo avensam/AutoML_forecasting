@@ -1,22 +1,25 @@
-*NOTE:* This file is a template that you can use to create the README for your project. The *TODO* comments below will highlight the information you should be sure to include.
+ 
+# Predicting Microsoft stock 
 
-# Your Project Title Here
-
-*TODO:* Write a short introduction to your project.
+In this project I consumed the latest stock data from yahoo strating 2019. Given the closing stock, the target here is to predict the next day's stock.
 
 ## Project Set Up and Installation
-*OPTIONAL:* If your project has any special installation steps, this is where you should put it. To turn this project into a professional portfolio project, you are encouraged to explain how to set up this project in AzureML.
+In this project I used AzureML forecasting tool (ensemble of forecasting models - [Set up AutoML training with Python](https://docs.microsoft.com/en-us/azure/machine-learning/how-to-configure-auto-train)
 
 ## Dataset
-
 ### Overview
-*TODO*: Explain about the data you are using and where you got it from.
+
+The data is a daily Microsoft stock that I reads through Yahoo finance. pandas has a simple remote data access for the Yahoo Finance API data. data.DataReader returns a Panel object, which can be thought of as a 3D matrix. The first dimension consists of the various fields Yahoo Finance returns for a given instrument, namely, the Open, High, Low, Close and Adj Close prices for each date. The second dimension contain the dates.
 
 ### Task
-*TODO*: Explain the task you are going to be solving with this dataset and the features you will be using for it.
+Here in this project I used two main tools; AzureML and LSTM to predict daily MSstock.I have created a hyperparameter experiments to run LSTM as well as AzureML and compared their results.
 
 ### Access
-*TODO*: Explain how you are accessing the data in your workspace.
+    # import the dataset from Yahoo finance
+     MSFT = data.DataReader('MSFT', 'yahoo',start='1/1/2019')
+     
+     ![Diagram1]( images/MSstock.PNG "MS stock") 
+
 
 ## Automated ML
 *TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
