@@ -18,20 +18,42 @@ Here in this project I used two main tools; AzureML and LSTM to predict daily MS
     # import the dataset from Yahoo finance
      MSFT = data.DataReader('MSFT', 'yahoo',start='1/1/2019')
      
-     ![Diagram1]( images/MSstock.PNG "MS stock") 
+![Diagram1]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/MSstock.PNG "MS stock") 
 
 
 ## Automated ML
-*TODO*: Give an overview of the `automl` settings and configuration you used for this experiment
+    #
+    automl_settings = {
+     "experiment_timeout_minutes":30,
+     "max_concurrent_iterations":4,
+     "primary_metric": "normalized_root_mean_squared_error",
+     'time_column_name': 'Date'
+     }
+     
+     automl_config = AutoMLConfig(compute_target=compute_target,
+                             task = "forecasting",
+                             training_data=dataset_train,
+                             label_column_name="Adj Close",
+                             enable_early_stopping= True,
+                             n_cross_validations=5,
+                             featurization= 'auto',
+                             debug_log = "automl_errors.log",
+                             **automl_settings
+                            )
 
 ### Results
-*TODO*: What are the results you got with your automated ML model? What were the parameters of the model? How could you have improved it?
+There were 36 models running, were the best model turned out to be voting ensemble with 0.94270894 MAE
 
-*TODO* Remeber to provide screenshots of the `RunDetails` widget as well as a screenshot of the best model trained with it's parameters.
+![Diagram1]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/autmlmodels.PNG "models running") 
+![Diagram2]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/autmlbestmodel.PNG "Rundetails") 
+![Diagram3]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/bestmodel.PNG "best model") 
+![Diagram4]( https://github.com/avensam/AutoML_forecasting/blob/master/starter_file/images/1.automlcompleted1.PNG "best model") 
+
 
 ## Hyperparameter Tuning
-*TODO*: What kind of model did you choose for this experiment and why? Give an overview of the types of parameters and their ranges used for the hyperparameter search
+34 different models were trained and compared The best model used the VotingEnsemble algorithm, reaching an accuracy of 87.30 %. Ten-fold cross validation was used. All the columns were used for training.
 
+According to (1), serum creatinine and ejection fraction are the most relevant features and are enough to predict if a patient with heart failure will survive or not. Thus, using a dataset with only these two columns would provide better results, increased accuracy and higher performance.
 
 ### Results
 *TODO*: What are the results you got with your model? What were the parameters of the model? How could you have improved it?
